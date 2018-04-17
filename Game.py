@@ -2,9 +2,10 @@
 Game.py
 
 Actually implements the game
-Lukas Peraza, 2015 for 15-112 Pygame Lecture
+Code taken from Lukas Peraza, 2015 for 15-112 Pygame Lecture
 '''
 import pygame
+from Map import Map
 from Hero import Hero
 from pygamegame import PygameGame
 import random
@@ -13,7 +14,8 @@ import random
 class Game(PygameGame):
     def init(self):
         self.bgColor = (0, 0, 0)
-        Hero.init()
+        self.map = Map()
+        self.map.drawMap(800, 500)
         hero = Hero(self.width / 2, self.height / 2)
         self.heroGroup = pygame.sprite.GroupSingle(hero)
 

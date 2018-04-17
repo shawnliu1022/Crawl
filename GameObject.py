@@ -2,8 +2,9 @@
 GameObject.py
 
 implements the base GameObject class, which defines the wraparound motion
-Lukas Peraza, 2015 for 15-112 Pygame Lecture
+This code was taken from Lukas Peraza, in the 15-112 Pygame Lecture
 '''
+#Code taken from 15-112 Pygame Lecture
 import pygame
 
 
@@ -12,7 +13,7 @@ class GameObject(pygame.sprite.Sprite):
         super(GameObject, self).__init__()
         # x, y define the center of the object
         self.x, self.y, self.image, self.radius = x, y, image, radius
-        self.baseImage = image.copy()  # non-rotated version of image
+        #self.baseImage = image.copy()  # non-rotated version of image
         w, h = image.get_size()
         self.updateRect()
         self.velocity = (0, 0)
