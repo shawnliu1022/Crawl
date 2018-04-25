@@ -32,12 +32,11 @@ class GameObject(pygame.sprite.Sprite):
         self.y += vy
         self.updateRect()
         # wrap around, and update the rectangle again
-        if self.rect.left > screenWidth:
-            self.x -= screenWidth + self.width
-        elif self.rect.right < 0:
-            self.x += screenWidth + self.width
-        if self.rect.top > screenHeight:
-            self.y -= screenHeight + self.height
-        elif self.rect.bottom < 0:
-            self.y += screenHeight + self.height
-        self.updateRect()
+        # if self.rect.left > screenWidth:
+        #     self.x -= screenWidth + self.width
+        # elif self.rect.right < 0:
+        #     self.x += screenWidth + self.width
+        # if self.rect.top > screenHeight:
+        #     self.y -= screenHeight + self.height
+        # elif self.rect.bottom < 0:
+        #     self.y += screenHeight + self.height

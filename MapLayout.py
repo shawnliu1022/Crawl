@@ -54,6 +54,7 @@ class MapLayout:
            if len(self.roomList)==mrooms:
                failed=fail
        self.finalJoins()
+       self.makeFinish()
  
    def makeRoom(self):
        """Randomly produce room size"""
@@ -152,6 +153,13 @@ class MapLayout:
            if self.mapArr[ry][rx]==2: #If space is a wall, exit
                break
        return rx,ry,rx2,ry2,rw
+       
+   def makeFinish(self):
+        rw=randrange(len(self.roomList))
+        room = self.roomList[rw]
+        rx = randrange(room[1])+room[2]
+        ry = randrange(room[0])+room[3]
+        self.mapArr[ry][rx] = 9
  
    def makePortal(self,px,py):
        """Create doors in walls"""
