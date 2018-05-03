@@ -18,17 +18,17 @@ class Leaderboard(object):
         lastElem = True
         print(len(self.scores))
         if len(self.scores)==0:
-            self.scores.append(name+","+str(t/1000))
+            self.scores.append(name+","+str(t))
         else:
             for index in range(len(self.scores)):
                 score = self.scores[index].split(",")[1]
                 print(t, float(score))
-                if t/1000 < float(score):
-                    self.scores.insert(index, name+","+str(t/1000))
+                if t < float(score):
+                    self.scores.insert(index, name+","+str(t))
                     lastElem = False
                     break
             if lastElem:
-                self.scores.append(name+","+str(t/1000))
+                self.scores.append(name+","+str(t))
         print(self.scores)
         for l in self.scores:
             elems = l.split(",")

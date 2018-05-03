@@ -73,14 +73,15 @@ class Game(PygameGame):
                     self.stairs.add(tile)
                 else:
                     continue
-                    
-        self.hero = Hero(random.randint(0, self.width), random.randint(0, self.height))
+        heroLocation = self.map.mapLayout.placeHero()            
+        self.hero = Hero(heroLocation[0]*32, heroLocation[1]*32)
         self.heroGroup = pygame.sprite.GroupSingle(self.hero)
-        while (not (pygame.sprite.groupcollide(self.heroGroup, self.floorTiles, False, False, pygame.sprite.collide_rect))  
-         or pygame.sprite.groupcollide(self.heroGroup, self.wallTiles, False, False, pygame.sprite.collide_rect) 
-         or pygame.sprite.groupcollide(self.heroGroup, self.doorTiles, False, False, pygame.sprite.collide_rect)):
-            self.hero = Hero(random.randint(0, self.width), random.randint(0, self.height))
-            self.heroGroup = pygame.sprite.GroupSingle(self.hero)
+        #Replaces hero if colliding with wall or door, or not colliding with floor
+        # while (not (pygame.sprite.groupcollide(self.heroGroup, self.floorTiles, False, False, pygame.sprite.collide_rect))  
+        #  or pygame.sprite.groupcollide(self.heroGroup, self.wallTiles, False, False, pygame.sprite.collide_rect) 
+        #  or pygame.sprite.groupcollide(self.heroGroup, self.doorTiles, False, False, pygame.sprite.collide_rect)):
+        #     self.hero = Hero(random.randint(0, self.width), random.randint(0, self.height))
+        #     self.heroGroup = pygame.sprite.GroupSingle(self.hero)
             
         self.monsterGroup = pygame.sprite.Group()
         self.monsterGroup.add(Demon(random.randint(self.hero.x-50,self.hero.x+50),
@@ -134,7 +135,8 @@ class Game(PygameGame):
             else:
                 self.hero.move(-self.hero.velocity[0], -self.hero.velocity[1], self.width, self.height)
                 
-        for arrow in pygame.sprite.groupcollide(self.heroGroup, self.arrowGroup, False, True, pygame.sprite.collide_rect):
+        for arrow in pygame.sprite.groupcollide(self.heroGroup, self.arrowGroup, 
+                                       False, True, pygame.sprite.collide_rect):
             self.arrowGroup.remove(arrow)
             self.hero.arrows += 1
             
@@ -167,11 +169,9 @@ class Game(PygameGame):
                     
         for arrow in self.movingArrows:
             arrow.move(self.width, self.height)
-            
-        #for arrow in pygame.sprite.groupcollide(self.movingArrows, self.wallTiles, False, False, pygame.sprite.collide_rect):
-         #   self.movingArrows.remove(arrow)
                     
-        for arrow in pygame.sprite.groupcollide(self.movingArrows, self.monsterGroup, False, False, pygame.sprite.collide_rect):
+        for arrow in pygame.sprite.groupcollide(self.movingArrows,  
+        self.monsterGroup, False, False, pygame.sprite.collide_rect):
             self.movingArrows.remove(arrow)
             dx, dy = self.hero.x - monster.x, self.hero.y - monster.y
             dist = math.hypot(dx, dy)
@@ -179,6 +179,14 @@ class Game(PygameGame):
             dx, dy = dx / dist, dy / dist
             for monster in self.monsterGroup:
                 monster.move(-dx*200, -dy*200, self.width, self.height)
+                
+        if pygame.sprite.groupcollide(self.heroGroup, self.monsterGroup, False, 
+          False, pygame.sprite.collide_rect) and self.hero.isAttacking == True:
+            dx, dy = self.hero.x - monster.x, self.hero.y - monster.y
+            dist = math.hypot(dx, dy)
+            dx, dy = dx / dist, dy / dist
+            for monster in self.monsterGroup:
+                monster.move(-dx*50, -dy*50, self.width, self.height)
         
             
 ####################################################

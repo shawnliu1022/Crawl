@@ -246,6 +246,14 @@ class MapLayout:
                rx = randrange(room[1])+room[2]
                ry = randrange(room[0])+room[3]
                self.mapArr[ry][rx] = 8
+               
+   def placeHero(self):
+        rw=randrange(len(self.roomList))
+        room = self.roomList[rw]
+        rx = randrange(room[1])+room[2]
+        ry = randrange(room[0])+room[3]
+        print(rx, ry)
+        return rx, ry
  
    def finalJoins(self):
        """Final stage, loops through all the corridors to see if any can be joined to other rooms"""
