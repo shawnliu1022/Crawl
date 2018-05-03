@@ -57,6 +57,8 @@ class Hero(GameObject):
         self.image = self.downImages[self.index]
         self.isAttacking = False
         self.health = 100
+        self.keys = 0
+        self.arrows = 0
         super().__init__(x, y, self.image, 10)
         
     def attack(self, keysDown, screenWidth, screenHeight):

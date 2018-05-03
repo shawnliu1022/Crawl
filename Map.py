@@ -11,7 +11,7 @@ class Map:
         self.startx=60   # map width
         self.starty=60   # map height
         self.mapLayout = MapLayout()
-        self.mapLayout.makeMap(self.startx,self.starty,80,25,60)
+        self.mapLayout.makeMap(self.startx,self.starty,80,25,50)
         
         for y in range(self.starty):
                 line = ""

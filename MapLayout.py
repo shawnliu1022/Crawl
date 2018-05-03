@@ -55,6 +55,8 @@ class MapLayout:
                failed=fail
        self.finalJoins()
        self.makeFinish()
+       self.makeKeys()
+       self.makeArrows()
  
    def makeRoom(self):
        """Randomly produce room size"""
@@ -167,7 +169,7 @@ class MapLayout:
        if ptype>90: #Secret door
            self.mapArr[py][px]=5
            return
-       elif ptype>75: #Closed door
+       elif ptype>70: #Closed door
            self.mapArr[py][px]=4
            return
        elif ptype>40: #Open door
@@ -230,6 +232,20 @@ class MapLayout:
            if self.mapArr[yyy][xxx]==0: #If joins to a room
                if randrange(100)<psb: #Possibility of linking rooms
                    self.makePortal(xxx1,yyy1)
+                   
+   def makeArrows(self):
+       for room in self.roomList:
+           if randint(0, 100)<80:
+               rx = randrange(room[1])+room[2]
+               ry = randrange(room[0])+room[3]
+               self.mapArr[ry][rx] = 7
+                   
+   def makeKeys(self):
+       for room in self.roomList:
+           if randint(0, 100) < 70:
+               rx = randrange(room[1])+room[2]
+               ry = randrange(room[0])+room[3]
+               self.mapArr[ry][rx] = 8
  
    def finalJoins(self):
        """Final stage, loops through all the corridors to see if any can be joined to other rooms"""

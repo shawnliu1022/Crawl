@@ -15,14 +15,18 @@ class Monster(GameObject):
         
     def moveTowardsPlayer(self, hero, screenWidth, screenHeight):
         vx, vy = 0, 0
-        if self.x-hero.x > 0:
+        if self.x-hero.x > 25:
             vx -= 1
-        else:
+        elif self.x-hero.x < -25:
             vx += 1
-        if self.y-hero.y > 0:
+        if self.y-hero.y > 25:
             vy -= 1
-        else:
+        elif self.y-hero.y < -25:
             vy += 1
+        self.velocity = vx, vy
+        super(Monster, self).update(screenWidth, screenHeight, self.image)
+        
+    def move(self, vx, vy, screenWidth, screenHeight):
         self.velocity = vx, vy
         super(Monster, self).update(screenWidth, screenHeight, self.image)
 
