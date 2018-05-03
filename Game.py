@@ -193,8 +193,8 @@ class Game(PygameGame):
 #Drawing functions
 ####################################################
     def displayHealthBar(self, screen):
-        emptyBar = pygame.transform.scale(pygame.image.load("images/player/EmptyBar.png"), (200, 20))
-        healthBar = pygame.transform.scale(pygame.image.load("images/player/RedBar.png"), (200, 20))
+        emptyBar = pygame.transform.scale(pygame.image.load("images/EmptyBar.png"), (200, 20))
+        healthBar = pygame.transform.scale(pygame.image.load("images/RedBar.png"), (200, 20))
         crop_rect=(0, 0, self.hero.health*2, 20)
         croppedHealth = healthBar.subsurface(crop_rect)
         screen.blit(emptyBar, (20, 20, 200, 200))
